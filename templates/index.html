@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--Custom CSS-->
+    <style type="text/css">
+        #form_div {
+
+            width: 50%;
+            margin: auto;
+            margin-top: 50px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="form_div">
+        <h1>Boston House Price Prediction</h1>
+        <form action="{{ url_for('predict')}}" method="post">
+            <!--Dont forget to give the inputs a "name" attribute and save yourself half an hour of debugging next time-->
+            <div class="form-group">
+                <label for="age">Model year (year of manufacture)</label>
+                <input type="number" name="age" class="form-control" placeholder="Year" required="required">
+            </div>
+            <div class="form-group">
+                <label for="Odometer">Odometer (number of miles the car has)</label>
+                <input type="number" name="odometer" class="form-control" placeholder="odometer" required="required">
+            </div>
+            <div class="form-group">
+                <label for="manufacturer">Manufacturer (brand)</label>
+                <select id="manufacturer" name="manufacturer" class="form-control">
+                    <option value="ford" selected>ford</option>
+                    <option value="gmc">gmc</option>
+                    <option value="chevrolet">chevrolet</option>
+                    <option value="toyota">toyota</option>
+                    <option value="jeep">jeep</option>
+                    <option value="nissan">nissan</option>
+                    <option value="honda">honda</option>
+                    <option value="dodge">dodge</option>
+                    <option value="hyundai">hyundai</option>
+                    <option value="ram">ram</option>
+                    <option value="mercedes-benz">mercedes-benz</option>
+                    <option value="bmw">bmw</option>
+                    <option value="volkswagen">volkswagen</option>
+                    <option value="kia">kia</option>
+                    <option value="subaru">subaru</option>
+                    <option value="other">other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="model">Model</label>
+                <select id="model" name="model" class="form-control">
+                    <option value="tacoma" selected>tacoma</option>
+                    <option value="camaro ss coupe 2d">camaro ss coupe 2d</option>
+                    <option value="odyssey">odyssey</option>
+                    <option value="accord">accord</option>
+                    <option value="escape">escape</option>
+                    <option value="silverado 1500">silverado 1500</option>
+                    <option value="tahoe">tahoe</option>
+                    <option value="silverado">silverado</option>
+                    <option value="f-150">f-150</option>
+                    <option value="impala">impala</option>
+                    <option value="prius">prius</option>
+                    <option value="camry">camry</option>
+                    <option value="altima">altima</option>
+                    <option value="charger">charger</option>
+                    <option value="jetta">jetta</option>
+                    <option value="sierra 1500">sierra 1500</option>
+                    <option value="sonata">sonata</option>
+                    <option value="2500">2500</option>
+                    <option value="wrangler">wrangler</option>
+                    <option value="grand cherokee">grand cherokee</option>
+                    <option value="equinox">equinox</option>
+                    <option value="civic">civic</option>
+                    <option value="1500">1500</option>
+                    <option value="malibu">malibu</option>
+                    <option value="corvette">corvette</option>
+                    <option value="rav4">rav4</option>
+                    <option value="outback">outback</option>
+                    <option value="explorer">explorer</option>
+                    <option value="grand caravan">grand caravan</option>
+                    <option value="corolla">corolla</option>
+                    <option value="other">other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="type">Type</label>
+                <select id="type" name="type" class="form-control">
+                    <option value="pickup" selected>pickup</option>
+                    <option value="sedan">sedan</option>
+                    <option value="truck">truck</option>
+                    <option value="coupe">coupe</option>
+                    <option value="hatchback">hatchback</option>
+                    <option value="suv">suv</option>
+                    <option value="van">van</option>
+                    <option value="wagon">wagon</option>
+                    <option value="other">other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="drive">Drive</label>
+                <select id="drive" name="drive" class="form-control">
+                    <option value="4wd" selected>4wd</option>
+                    <option value="fwd">fwd</option>
+                    <option value="rwd">rwd</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="transmission">Transmission</label>
+                <select id="transmission" name="transmission" class="form-control">
+                    <option value="automatic" selected>automatic</option>
+                    <option value="manual">manual</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="fuel">Fuel</label>
+                <select id="fuel" name="fuel" class="form-control">
+                    <option value="gas" selected>gas</option>
+                    <option value="diesel">diesel</option>
+                    <option value="other">other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="paint_color">Paint_color</label>
+                <select id="paint_color" name="paint_color" class="form-control">
+                    <option value="white" selected>white</option>
+                    <option value="black">black</option>
+                    <option value="silver">silver</option>
+                    <option value="grey">grey</option>
+                    <option value="blue">blue</option>
+                    <option value="red">red</option>
+                    <option value="brown">brown</option>
+                    <option value="green">green</option>
+                    <option value="yellow">yellow</option>
+                    <option value="orange">orange</option>
+                    <option value="purple">purple</option>
+                    <option value="other">other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="condition">Condition</label>
+                <select id="condition" name="condition" class="form-control">
+                    <option value="excellent" selected>excellent</option>
+                    <option value="good">good</option>
+                    <option value="like new">like new</option>
+                    <option value="fair">fair</option>
+                    <option value="salvage">salvage</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+    </div>
+
+    <br>
+    <br>
+
+    {{ prediction_text }}
+
+    <!--Bootstrap JS-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
